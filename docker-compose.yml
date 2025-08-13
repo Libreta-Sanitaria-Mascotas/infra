@@ -61,8 +61,10 @@ services:
     volumes:
       - ../user:/app
     command: sh -c "npm i && npm run start:dev"
-    ports:
-      - "3002:3002"
+    expose:
+      - "3002"
+    # ports:
+    #   - "3002:3002"
     environment:
       - NODE_ENV=development
     depends_on:
@@ -140,7 +142,26 @@ services:
       - health_db_data:/var/lib/postgresql/data  
     networks:
       - app-network
-    
+  #=== GATEWAY ===
+  gateway:
+    image: node:22.16.0-alpine
+    container_name: gateway_service
+    working_dir: /app
+    volumes:
+      - ../gateway:/app
+    command: sh -c "npm i && npm run start:dev"
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    # depends_on:
+    #   - auth
+    #   - user
+    #   - pet
+    #   - health
+    networks:
+      - app-network
+
 volumes:
   auth_db_data:
   user_db_data:
