@@ -31,8 +31,10 @@ services:
     volumes:
       - ../auth:/app
     command: sh -c "npm i && npm run start:dev"
-    ports:
-      - "3001:3001"
+    # ports:
+    #   - "3001:3001"
+    expose:
+      - "3001"
     environment:
       - NODE_ENV=development
     depends_on:
