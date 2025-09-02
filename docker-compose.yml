@@ -125,8 +125,10 @@ services:
     volumes:
       - ../health:/app
     command: sh -c "npm i && npm run start:dev"
-    ports:
-      - "3004:3004"
+    # ports:
+    #   - "3004:3004"
+    expose:
+      - "3004"
     environment:
       - NODE_ENV=development
     depends_on:
