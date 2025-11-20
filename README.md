@@ -29,13 +29,12 @@ La infraestructura incluye los siguientes servicios:
   - Base de datos PostgreSQL dedicada (Puerto: 5436)
 
 ### Servicios de Infraestructura
-
-- **Redis** (Puerto: 6379)
-  - Caché y gestión de sesiones
-
-- **PgAdmin** (Puerto: 5050)
-  - Interfaz web para administración de bases de datos PostgreSQL
-  - Credenciales por defecto: admin@admin.com / admin
+- **Redis** (`redis_service`): Puerto 6379 - Almacenamiento en caché / sesiones
+- **RabbitMQ** (`rabbitmq`): Puertos 5672 (AMQP) y 15672 (Management UI) - Message Broker
+- **PgAdmin** (`pgadmin4`): Puerto 5050 - Administración de bases de datos PostgreSQL
+  - Acceso: http://localhost:5050
+  - Usuario: admin@admin.com
+  - Contraseña: admin
 
 ## Redes
 
@@ -49,6 +48,7 @@ Se utilizan los siguientes volúmenes para persistencia de datos:
 - `user_db_data`: Datos de la base de datos de usuarios
 - `pet_db_data`: Datos de la base de datos de mascotas
 - `health_db_data`: Datos de la base de datos de salud
+- `media_db_data`: Datos de la base de datos de archivos
 - `pgadmin_data`: Datos de configuración de PgAdmin
 
 ## Requisitos
