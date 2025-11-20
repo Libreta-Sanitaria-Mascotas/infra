@@ -182,6 +182,36 @@ services:
     #   - health
     networks:
       - app-network
+  #=== MEDIA ===
+  media:
+    image: node:22.16.0-alpine
+    container_name: media_service
+    working_dir: /app
+    volumes:
+      - ../media:/app
+    command: sh -c "npm i && npm run start:dev"
+    expose:
+      - "3005"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - media_db
+    networks:
+      - app-network
+
+  media_db:
+    image: postgres:15-alpine
+    container_name: media_db
+    ports:
+      - "5437:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=media_db
+    volumes:
+      - media_db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
 
 volumes:
   auth_db_data:
@@ -190,6 +220,7 @@ volumes:
   health_db_data:
   pgadmin_data:
   rabbitmq_data:
+  media_db_data:
 
 networks:
   app-network:
