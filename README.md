@@ -60,19 +60,19 @@ Se utilizan los siguientes volúmenes para persistencia de datos:
 ### Iniciar los servicios
 
 ```bash
-docker-compose up -d
+docker compose -f docker-compose.yml up -d
 ```
 
 ### Detener los servicios
 
 ```bash
-docker-compose down
+docker compose -f docker-compose.yml down
 ```
 
 ### Ver logs de un servicio específico
 
 ```bash
-docker-compose logs -f [nombre_del_servicio]
+docker compose -f docker-compose.yml logs -f [nombre_del_servicio]
 ```
 
 Ejemplo:
