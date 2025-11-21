@@ -213,6 +213,24 @@ services:
     networks:
       - app-network
 
+  #=== APP WEB ===
+  app:
+    image: node:22.16.0-alpine
+    container_name: app_web
+    working_dir: /app
+    volumes:
+      - ../app:/app
+    command: sh -c "npm i && npm run web"
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=development
+      - EXPO_PUBLIC_API_URL=http://localhost:3000/api
+    depends_on:
+      - gateway
+    networks:
+      - app-network
+
 volumes:
   auth_db_data:
   user_db_data:
@@ -221,6 +239,7 @@ volumes:
   pgadmin_data:
   rabbitmq_data:
   media_db_data:
+
 
 networks:
   app-network:
