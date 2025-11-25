@@ -70,7 +70,7 @@ services:
       - auth_db_data:/var/lib/postgresql/data
     networks:
       - app-network
-  
+
   #=== NOTIFICATION ===
   notification:
     image: node:22.16.0-alpine
@@ -208,8 +208,8 @@ services:
     volumes:
       - ../media:/app
     command: sh -c "npm i && npm run start:dev"
-    expose:
-      - "3005"
+    ports:
+      - "3005:3005"
     environment:
       - NODE_ENV=development
     depends_on:
@@ -244,6 +244,7 @@ services:
     environment:
       - NODE_ENV=development
       - EXPO_PUBLIC_API_URL=http://localhost:3000/api
+      - EXPO_PUBLIC_MEDIA_URL=http://localhost:3005/api
     depends_on:
       - gateway
     networks:
