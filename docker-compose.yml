@@ -70,6 +70,24 @@ services:
       - auth_db_data:/var/lib/postgresql/data
     networks:
       - app-network
+  
+  #=== NOTIFICATION ===
+  notification:
+    image: node:22.16.0-alpine
+    container_name: notification_service
+    working_dir: /app
+    volumes:
+      - ../notification:/app
+    command: sh -c "npm i && npm run start:dev"
+    expose:
+      - "3006"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+
   #=== USER ===
   user:
     image: node:22.16.0-alpine
