@@ -24,6 +24,17 @@ services:
     networks:
       - app-network
 
+#== REDIS INSIGHT ===
+  redis_insight:
+    image: redis/redisinsight:latest
+    container_name: redis_insight
+    ports:
+      - "5540:5540"
+    depends_on:
+      - redis
+    networks:
+      - app-network
+
   #=== RABBITMQ ===
   rabbitmq:
     image: rabbitmq:3-management-alpine
